@@ -1,9 +1,11 @@
-import './App.css'
+import { TodoPage } from './pages/todo-page'
 
 function App() {
 
   return (
-    <div></div>
+    <div >
+      <TodoPage />
+    </div>
   )
 }
 

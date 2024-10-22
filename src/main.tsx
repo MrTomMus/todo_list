@@ -1,12 +1,46 @@
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
-import { ChakraProvider } from '@chakra-ui/react'
+
+
+const theme = extendTheme({
+  config: {
+    initialColorMode: 'dark', // Установите темную тему по умолчанию
+    useSystemColorMode: false, // Отключите автоматическое определение темы системы
+  },
+  colors: {
+    // Определите свои цвета для темной темы
+    brand: {
+      50: '#f0e4ff',
+      100: '#d1c1f4',
+      200: '#b39ee9',
+      300: '#947adb',
+      400: '#7657cf',
+      500: '#5c3da6',
+      600: '#472f80',
+      700: '#33215b',
+      800: '#1e1335',
+      900: '#0a0510',
+    },
+  },
+  styles: {
+    global: (props: any) => ({
+      "html, body": {
+        bg: props.colorMode === 'dark' ? 'gray.800' : 'white',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
+      },
+    }),
+  },
+});
+
+console.log(theme.config.initialColorMode)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ChakraProvider>
-      <App />
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <App />
     </ChakraProvider>
   </StrictMode>,
 )
