@@ -6,11 +6,10 @@ import App from './App.tsx'
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'dark', // Установите темную тему по умолчанию
-    useSystemColorMode: false, // Отключите автоматическое определение темы системы
+    initialColorMode: 'dark', 
+    useSystemColorMode: false, 
   },
   colors: {
-    // Определите свои цвета для темной темы
     brand: {
       50: '#f0e4ff',
       100: '#d1c1f4',
@@ -34,7 +33,6 @@ const theme = extendTheme({
   },
 });
 
-console.log(theme.config.initialColorMode)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
