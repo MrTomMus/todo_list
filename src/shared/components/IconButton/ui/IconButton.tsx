@@ -1,8 +1,8 @@
 import { Box, Button, Image } from "@chakra-ui/react"
 
 interface IconButton {
-    imgSrc?: string, // TODO Разобратсья в типизации
-    hundleButton: (type:string) => void,
+    imgSrc: string, // TODO Разобратсья в типизации
+    hundleButton?: (type:string) => void,
 }
 
 export const IconButton = ({imgSrc, hundleButton, }:IconButton) => {
