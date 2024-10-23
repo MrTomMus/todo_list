@@ -23,6 +23,7 @@ const theme = extendTheme({
       800: '#1e1335',
       900: '#0a0510',
     },
+    colorsText: 'red'
   },
   styles: {
     global: (props: any) => ({
