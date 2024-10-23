@@ -13,5 +13,8 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "vite-plugin-svgr/client"],
+  "files": [
+        "client.d.ts"
+    ],
 }

@@ -2,6 +2,7 @@ import { Box, Button, Flex, IconButton, Input, useColorMode } from "@chakra-ui/r
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { Task } from "src/features/Task";
+import { CounterTask } from "src/features/CounterTask";
 
 
 
@@ -24,11 +25,22 @@ export const TodoList = () => {
             <Flex gap="20px" p="100px 50px 0 50px" direction="column" justify="center" align="center">
                 <Input onChange={(e) => setValue(e.currentTarget.value)} maxW="500px" placeholder="Введите вашу задачу" value={value} />
                 <Flex maxW="500px" w="100%" justify="space-between">
-                    <Button color="colorsText">Все задачи</Button>
-                    <Button>Выполненые</Button>
-                    <Button>В процессе</Button>
+                    <Button>
+                        <CounterTask counter={10} />
+                        Все задачи
+                    </Button>
+                    <Button>
+                        <CounterTask counter={2} />
+                        Выполненые
+                    </Button>
+                    <Button>
+                        <CounterTask counter={12} />
+                        В процессе
+                    </Button>
                 </Flex>
-                <Task />
+                <Task title="dsafdsfdsdsfdsfsfdsd"/>
+                <Task title="dsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsd"/>
+                <Task title="dsafdsfdsdsfdsfsfddsafdsfdsdsfdsfsfdsdsd"/>
             </Flex>
 
         </Box>

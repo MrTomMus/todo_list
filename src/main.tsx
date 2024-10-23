@@ -23,7 +23,9 @@ const theme = extendTheme({
       800: '#1e1335',
       900: '#0a0510',
     },
-    colorsText: 'red'
+    colors: (props: any) => ({
+      iconColor: props.colorMode === 'dark' ? 'white' : 'black'
+    })
   },
   styles: {
     global: (props: any) => ({

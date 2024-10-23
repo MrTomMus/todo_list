@@ -1,14 +1,15 @@
-import { Button, Image } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 
 interface IconButton {
-    imgSrc: string, // TODO Разобратсья в типизации
+    children: React.ReactNode, // TODO Разобратсья в типизации
     hundleButton?: (type:string) => void,
+
 }
 
-export const IconButton = ({imgSrc,  }:IconButton) => {
+export const IconButton = ({children}:IconButton) => {
     return (
         <Button p="0" m="5px">
-           <Image w="25px" src={imgSrc} />  
+           {children}
         </Button>
     )
 }

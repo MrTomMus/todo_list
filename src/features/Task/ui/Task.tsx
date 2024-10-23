@@ -1,7 +1,7 @@
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Flex, useColorMode } from "@chakra-ui/react"
 
-import edit from "src/shared/assets/icons/edit.svg"
-import basket from "src/shared/assets/icons/basket.svg"
+import { ReactComponent as Edit } from "src/shared/assets/icons/edit.svg"
+import {ReactComponent as Basket } from "src/shared/assets/icons/basket.svg"
 import { IconButton } from "src/shared/components/IconButton"
 
 
@@ -10,6 +10,11 @@ interface TaskProps {
 }
 
 export const Task = ({ title }: TaskProps) => {
+
+    const { colorMode } = useColorMode();
+
+    const strokeColor = colorMode === "dark" ? "white" : "black";
+
     return (
         <Flex 
             maxW="800px" 
@@ -25,8 +30,12 @@ export const Task = ({ title }: TaskProps) => {
             {title}
             </Box>
             <Flex>
-                <IconButton imgSrc={edit} />
-                <IconButton imgSrc={basket} />
+                <IconButton>
+                    <Edit stroke={strokeColor} />
+                </IconButton>
+                <IconButton>
+                    <Basket stroke={strokeColor} />
+                </IconButton>
             </Flex>
         </Flex>
     )
