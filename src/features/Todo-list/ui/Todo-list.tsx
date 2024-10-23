@@ -1,7 +1,10 @@
 import { Box, Button, Flex, IconButton, Input, useColorMode } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import { Task } from "../../Task";
+import { Task } from "src/features/Task";
+
+
+
 
 export const TodoList = () => {
 

@@ -1,7 +1,5 @@
 import { Box } from "@chakra-ui/react"
-import { TodoList } from "../../../features/Todo-list" // TODO Исправить путь на абсолютный
-
-
+import { TodoList } from "src/features/Todo-list"
 
 export const TodoPage = () => {
 

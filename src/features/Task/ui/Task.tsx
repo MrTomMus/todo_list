@@ -1,10 +1,12 @@
 import { Box, Flex } from "@chakra-ui/react"
-import { IconButton } from "../../../shared/components/IconButton"
-import edit from "../../../shared/assets/icons/edit.svg"
-import basket from "../../../shared/assets/icons/basket.svg"
+
+import edit from "src/shared/assets/icons/edit.svg"
+import basket from "src/shared/assets/icons/basket.svg"
+import { IconButton } from "src/shared/components/IconButton"
+
 
 interface TaskProps {
-    title: string,
+    title?: string,
 }
 
 export const Task = ({ title }: TaskProps) => {
