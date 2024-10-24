@@ -1,16 +1,23 @@
 import { Box, Button, Flex, IconButton, Input, useColorMode } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import {  useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
+import { TaskObj } from "src/shared/api";
 
+interface TodoListProps {
+    tasks: TaskObj[]
+}
 
-
-
-export const TodoList = () => {
+export const TodoList = ({tasks}:TodoListProps) => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const [ value, setValue ] = useState('');
+
+
+    const taskElements = tasks.map((elem) => (
+        <Task title={elem.title} key={elem.id} />
+    ));
 
     return (
         <Box >
@@ -26,11 +33,11 @@ export const TodoList = () => {
                 <Input onChange={(e) => setValue(e.currentTarget.value)} maxW="500px" placeholder="Введите вашу задачу" value={value} />
                 <Flex maxW="500px" w="100%" justify="space-between">
                     <Button>
-                        <CounterTask counter={10} />
+                        <CounterTask counter={tasks.length} />
                         Все задачи
                     </Button>
                     <Button>
-                        <CounterTask counter={2} />
+                        <CounterTask counter={100} />
                         Выполненые
                     </Button>
                     <Button>
@@ -38,11 +45,8 @@ export const TodoList = () => {
                         В процессе
                     </Button>
                 </Flex>
-                <Task title="dsafdsfdsdsfdsfsfdsd"/>
-                <Task title="dsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsddsafdsfdsdsfdsfsfdsd"/>
-                <Task title="dsafdsfdsdsfdsfsfddsafdsfdsdsfdsfsfdsdsd"/>
+                {taskElements}
             </Flex>
-
         </Box>
     )
 }
