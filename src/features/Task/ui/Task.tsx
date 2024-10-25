@@ -6,14 +6,23 @@ import { IconButton } from "src/shared/components/IconButton"
 
 interface TaskProps {
     title?: string,
+    id: string,
     
 }
 
-export const Task = ({ title}: TaskProps) => {
+export const Task = ({ title, id }: TaskProps) => {
 
     const { colorMode } = useColorMode();
 
     const strokeColor = colorMode === "dark" ? "white" : "black";
+
+    const handleEdit = () => {
+        console.log('Изменили')
+    }
+
+    const handleDelete = () => {
+        console.log('Удалили')
+    }
 
     return (
         <Flex 
@@ -31,10 +40,10 @@ export const Task = ({ title}: TaskProps) => {
             {title}
             </Box>
             <Flex>
-                <IconButton>
-                    <Edit stroke={strokeColor} />
+                <IconButton handleButton={handleEdit}>
+                    <Edit stroke={strokeColor}  />
                 </IconButton>
-                <IconButton>
+                <IconButton handleButton={handleDelete}>
                     <Basket stroke={strokeColor} />
                 </IconButton>
             </Flex>
