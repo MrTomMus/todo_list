@@ -10,7 +10,6 @@ export const TodoPage = () => {
     useEffect(() => {
         const handleGetTask = async () => {
             const response = await getData();
-
             setTasks(response.data);
         }
 

@@ -4,12 +4,12 @@ import {  useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
 import { TaskObj } from "src/shared/api/tasks/types";
-import { getDataCompleted } from "src/shared/api/tasks/api";
+import { getData, getDataCompleted, getDataInWork } from "src/shared/api/tasks/api";
 
 
 interface TodoListProps {
     tasks: TaskObj[]
-    setTasks: (tasks: TaskObj[]) => void
+    setTasks: (tasks: []) => void
 }
 
 export const TodoList = ({tasks, setTasks}:TodoListProps) => {
@@ -22,11 +22,25 @@ export const TodoList = ({tasks, setTasks}:TodoListProps) => {
         <Task title={elem.title} key={elem.id} id={elem.id} />
     ));
 
+    const getAllTask = async () => {
+        const response = await getData();
+        
+        setTasks(response.data) 
+    }
+
     const getComplitedTask = async () => {
         const response = await getDataCompleted();
-
         
+        setTasks(response.data)   
     }
+
+    const getInWorkTask = async () => {
+        const response = await getDataInWork();
+
+        setTasks(response.data)
+    }
+
+    
 
     return (
         <Box >
@@ -41,15 +55,15 @@ export const TodoList = ({tasks, setTasks}:TodoListProps) => {
             <Flex gap="20px" p="100px 50px 0 50px" direction="column" justify="center" align="center">
                 <Input onChange={(e) => setValue(e.currentTarget.value)} maxW="500px" placeholder="Введите вашу задачу" value={value} />
                 <Flex maxW="500px" w="100%" justify="space-between">
-                    <Button>
+                    <Button onClick={() => getAllTask()}>
                         <CounterTask counter={tasks.length} />
                         Все задачи
                     </Button>
-                    <Button onClick={() => getComplitedTask}>
+                    <Button onClick={() => getComplitedTask()}>
                         <CounterTask counter={tasks.filter(obj => obj.isDone === true).length} />
                         Выполненые
                     </Button>
-                    <Button>
+                    <Button onClick={() => getInWorkTask()}>
                         <CounterTask counter={tasks.filter(obj => obj.isDone !== true).length} />
                         В процессе
                     </Button>
