@@ -3,7 +3,8 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {  useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
-import { TaskObj } from "src/shared/api";
+import { TaskObj } from "src/shared/api/tasks/types";
+
 
 interface TodoListProps {
     tasks: TaskObj[]

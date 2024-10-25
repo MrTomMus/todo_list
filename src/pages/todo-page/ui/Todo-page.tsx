@@ -1,21 +1,20 @@
 import { Box } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { TodoList } from "src/features/Todo-list"
+import { getData } from "src/shared/api/tasks/api";
 
 export const TodoPage = () => {
 
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        const url = 'https://easydev.club/api/v1/todos?filter=all'; // TODO Вынести запрос в API
+        const handleGetTask = async () => {
+            const response = await getData();
 
-        async function getData() {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            setTasks(data.data)
+            setTasks(response.data);
         }
-        getData()
+
+        handleGetTask()
     },[]);
 
 
