@@ -21,7 +21,7 @@ export const TodoPage = () => {
     // TODO Тут обертка для Loader
     return (
         <Box> 
-            <TodoList tasks={tasks}/>
+            <TodoList tasks={tasks} setTasks={setTasks}/>
         </Box>
             
     )

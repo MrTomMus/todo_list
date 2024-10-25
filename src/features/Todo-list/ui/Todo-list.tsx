@@ -4,21 +4,29 @@ import {  useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
 import { TaskObj } from "src/shared/api/tasks/types";
+import { getDataCompleted } from "src/shared/api/tasks/api";
 
 
 interface TodoListProps {
     tasks: TaskObj[]
+    setTasks: (tasks: TaskObj[]) => void
 }
 
-export const TodoList = ({tasks}:TodoListProps) => {
+export const TodoList = ({tasks, setTasks}:TodoListProps) => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const [ value, setValue ] = useState('');
 
 
     const taskElements = tasks.map((elem) => (
-        <Task title={elem.title} key={elem.id} />
+        <Task title={elem.title} key={elem.id} id={elem.id} />
     ));
+
+    const getComplitedTask = async () => {
+        const response = await getDataCompleted();
+
+        
+    }
 
     return (
         <Box >
@@ -37,12 +45,12 @@ export const TodoList = ({tasks}:TodoListProps) => {
                         <CounterTask counter={tasks.length} />
                         Все задачи
                     </Button>
-                    <Button>
-                        <CounterTask counter={100} />
+                    <Button onClick={() => getComplitedTask}>
+                        <CounterTask counter={tasks.filter(obj => obj.isDone === true).length} />
                         Выполненые
                     </Button>
                     <Button>
-                        <CounterTask counter={12} />
+                        <CounterTask counter={tasks.filter(obj => obj.isDone !== true).length} />
                         В процессе
                     </Button>
                 </Flex>

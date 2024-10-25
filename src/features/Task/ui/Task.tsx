@@ -16,12 +16,12 @@ export const Task = ({ title, id }: TaskProps) => {
 
     const strokeColor = colorMode === "dark" ? "white" : "black";
 
-    const handleEdit = () => {
-        console.log('Изменили')
+    const handleEdit = (type:string) => {
+        console.log(type)
     }
 
-    const handleDelete = () => {
-        console.log('Удалили')
+    const handleDelete = (type:string) => {
+        console.log(type)
     }
 
     return (
@@ -40,10 +40,10 @@ export const Task = ({ title, id }: TaskProps) => {
             {title}
             </Box>
             <Flex>
-                <IconButton handleButton={handleEdit}>
+                <IconButton id={id} handleButton={handleEdit}>
                     <Edit stroke={strokeColor}  />
                 </IconButton>
-                <IconButton handleButton={handleDelete}>
+                <IconButton id={id} handleButton={handleDelete}>
                     <Basket stroke={strokeColor} />
                 </IconButton>
             </Flex>
