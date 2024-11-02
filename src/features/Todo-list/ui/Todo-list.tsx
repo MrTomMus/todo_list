@@ -6,13 +6,20 @@ import { CounterTask } from "src/features/CounterTask";
 import { TaskObj } from "src/shared/api/tasks/types";
 import { getData, getDataCompleted, getDataInWork } from "src/shared/api/tasks/api";
 
+interface Info {
+    all: number,
+    completed: number,
+    inWork: number,
+}
+
 
 interface TodoListProps {
     tasks: TaskObj[]
     setTasks: (tasks: []) => void
+    info?: Info, // TODO Поправить типизацию
 }
 
-export const TodoList = ({tasks, setTasks}:TodoListProps) => {
+export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const [ value, setValue ] = useState('');
@@ -40,8 +47,6 @@ export const TodoList = ({tasks, setTasks}:TodoListProps) => {
         setTasks(response.data)
     }
 
-    
-
     return (
         <Box >
             <IconButton 
@@ -56,15 +61,15 @@ export const TodoList = ({tasks, setTasks}:TodoListProps) => {
                 <Input onChange={(e) => setValue(e.currentTarget.value)} maxW="500px" placeholder="Введите вашу задачу" value={value} />
                 <Flex maxW="500px" w="100%" justify="space-between">
                     <Button onClick={() => getAllTask()}>
-                        <CounterTask counter={tasks.length} />
+                        <CounterTask counter={info ? info.all : 0} />
                         Все задачи
                     </Button>
                     <Button onClick={() => getComplitedTask()}>
-                        <CounterTask counter={tasks.filter(obj => obj.isDone === true).length} />
+                        <CounterTask counter={info ? info.completed : 0} />
                         Выполненые
                     </Button>
                     <Button onClick={() => getInWorkTask()}>
-                        <CounterTask counter={tasks.filter(obj => obj.isDone !== true).length} />
+                        <CounterTask counter={info ? info.inWork : 0} />
                         В процессе
                     </Button>
                 </Flex>
