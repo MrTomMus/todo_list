@@ -47,6 +47,12 @@ export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
         setTasks(response.data)
     }
 
+    const addTask = (event: any) => {
+        if(event.key === "Enter") {
+            console.log(event.currentTarget.value);
+        }
+    }
+
     return (
         <Box >
             <IconButton 
@@ -58,7 +64,7 @@ export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
                 onClick={toggleColorMode}
                 variant="ghost" />
             <Flex gap="20px" p="100px 50px 0 50px" direction="column" justify="center" align="center">
-                <Input onChange={(e) => setValue(e.currentTarget.value)} maxW="500px" placeholder="Введите вашу задачу" value={value} />
+                <Input onChange={(e) => setValue(e.currentTarget.value)} onKeyDown={addTask}  maxW="500px" placeholder="Введите вашу задачу" value={value} />
                 <Flex maxW="500px" w="100%" justify="space-between">
                     <Button onClick={() => getAllTask()}>
                         <CounterTask counter={info ? info.all : 0} />
