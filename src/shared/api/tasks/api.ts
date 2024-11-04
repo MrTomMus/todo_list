@@ -20,3 +20,23 @@ export async function getDataInWork() {
 
     return data;
 }
+
+export async function createTask(task: string) {
+    const response = await fetch(`${API_TASK}/todos`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+        body: JSON.stringify({
+            isDone: false,
+            title: task,
+        })
+    })
+
+    if(!response.ok) {
+        throw new Error(`Error ${response.status}`)
+    }
+
+    const result = response.json();
+    return result;
+}

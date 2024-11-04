@@ -4,7 +4,7 @@ import {  useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
 import { TaskObj } from "src/shared/api/tasks/types";
-import { getData, getDataCompleted, getDataInWork } from "src/shared/api/tasks/api";
+import { createTask, getData, getDataCompleted, getDataInWork } from "src/shared/api/tasks/api";
 
 interface Info {
     all: number,
@@ -47,10 +47,13 @@ export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
         setTasks(response.data)
     }
 
-    const addTask = (event: any) => {
+    const addTask = async(event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
-            console.log(event.currentTarget.value);
-        }
+            createTask(event.currentTarget.value)
+
+            const response = await getData();
+            setTasks(response.data)
+        } 
     }
 
     return (
