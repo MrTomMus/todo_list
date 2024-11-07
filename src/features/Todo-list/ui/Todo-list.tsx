@@ -16,13 +16,15 @@ interface Info {
 interface TodoListProps {
     tasks: TaskObj[]
     setTasks: (tasks: []) => void
+    setInfo: ({}: Info) => void,
     info?: Info, // TODO Поправить типизацию
 }
 
-export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
+export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const [ value, setValue ] = useState('');
+    
 
 
     const taskElements = tasks.map((elem) => (
@@ -49,10 +51,11 @@ export const TodoList = ({tasks, setTasks, info}:TodoListProps) => {
 
     const addTask = async(event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
-            createTask(event.currentTarget.value)
+            await createTask(event.currentTarget.value)
 
             const response = await getData();
             setTasks(response.data)
+            setInfo(response.info)
         } 
     }
 
