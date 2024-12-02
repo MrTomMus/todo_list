@@ -1,23 +1,16 @@
 import { Box, Button, Flex, IconButton, Input, useColorMode } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import {  useState } from "react";
+import { useState } from "react";
 import { Task } from "src/features/Task";
 import { CounterTask } from "src/features/CounterTask";
-import { TaskObj } from "src/shared/api/tasks/types";
+import { Info, TaskObj } from "src/shared/api/tasks/types";
 import { createTask, getData, getDataCompleted, getDataInWork } from "src/shared/api/tasks/api";
-
-interface Info {
-    all: number,
-    completed: number,
-    inWork: number,
-}
-
 
 interface TodoListProps {
     tasks: TaskObj[]
     setTasks: (tasks: []) => void
-    setInfo: ({}: Info) => void,
-    info?: Info, // TODO Поправить типизацию
+    setInfo: (info: Info) => void,
+    info?: Info, 
 }
 
 export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
@@ -25,7 +18,6 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [ value, setValue ] = useState('');
     
-
 
     const taskElements = tasks.map((elem) => (
         <Task title={elem.title} key={elem.id} id={elem.id} />
@@ -47,15 +39,20 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
         const response = await getDataInWork();
 
         setTasks(response.data)
+        
     }
-
+    
     const addTask = async(event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
-            await createTask(event.currentTarget.value)
+           await createTask(event.currentTarget.value)
+            
+            const result = await getData();
 
-            const response = await getData();
-            setTasks(response.data)
-            setInfo(response.info)
+            if(value) {
+                setTasks(result.data)
+                setInfo(result.info)
+                setValue('')
+            }
         } 
     }
 

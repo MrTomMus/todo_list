@@ -2,11 +2,12 @@ import { Box } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { TodoList } from "src/features/Todo-list"
 import { getData } from "src/shared/api/tasks/api";
+import { Info } from "src/shared/api/tasks/types";
 
 export const TodoPage = () => {
 
     const [tasks, setTasks] = useState([]);
-    const [info,  setInfo] = useState();
+    const [info,  setInfo] = useState<Info>();
 
     useEffect(() => {
         const handleGetTask = async () => {

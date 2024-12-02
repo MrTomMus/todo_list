@@ -2,6 +2,7 @@ const API_TASK = 'https://easydev.club/api/v1';
 
 export async function getData() {
     const response = await fetch(`${API_TASK}/todos?filter=all`);
+   
     const data = await response.json();
 
     return data;
@@ -37,6 +38,7 @@ export async function createTask(task: string) {
         throw new Error(`Error ${response.status}`)
     }
 
-    const result = response.json();
+    
+    const result = await response.json();
     return result;
 }
