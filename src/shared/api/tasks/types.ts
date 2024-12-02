@@ -4,3 +4,9 @@
     created: string,
     isDone: boolean,
 }
+
+export interface Info {
+    all: number,
+    completed: number,
+    inWork: number,
+}
