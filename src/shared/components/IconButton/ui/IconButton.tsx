@@ -9,7 +9,7 @@ interface IconButton {
 
 export const IconButton =  ({children, handleButton, id}:IconButton) => {
     return (
-        <Button onClick={() => console.log(id)} p="0" m="5px">
+        <Button onClick={() => handleButton(id)} p="0" m="5px">
            {children}
         </Button>
     )

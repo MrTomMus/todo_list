@@ -8,7 +8,7 @@ import { createTask, getData, getDataCompleted, getDataInWork } from "src/shared
 
 interface TodoListProps {
     tasks: TaskObj[]
-    setTasks: (tasks: []) => void
+    setTasks: (tasks: []) => void,
     setInfo: (info: Info) => void,
     info?: Info, 
 }
@@ -20,7 +20,7 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
     
 
     const taskElements = tasks.map((elem) => (
-        <Task title={elem.title} key={elem.id} id={elem.id} />
+        <Task title={elem.title} key={elem.id} id={elem.id} setTasks={setTasks} tasks={tasks} setInfo={setInfo} info={info} />
     ));
 
     const getAllTask = async () => {

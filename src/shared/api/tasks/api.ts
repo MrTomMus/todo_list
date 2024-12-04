@@ -38,7 +38,23 @@ export async function createTask(task: string) {
         throw new Error(`Error ${response.status}`)
     }
 
-    
     const result = await response.json();
     return result;
+}
+
+export async function deleteTask(id: string) {
+    const response = await fetch(`${API_TASK}/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+        }
+    })
+
+    if(!response.ok) {
+        throw new Error(`Удаление не удалось ${response.status}`);
+    }
+
+    const result = await response.text();
+
+    return result
 }

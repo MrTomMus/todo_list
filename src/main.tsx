@@ -35,9 +35,6 @@ const theme = extendTheme({
   },
 });
 
-const Curs = () => {
-  return  1
-}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

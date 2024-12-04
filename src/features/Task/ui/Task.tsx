@@ -2,31 +2,40 @@ import { Box, Flex, useColorMode } from "@chakra-ui/react"
 import { ReactComponent as Edit } from "src/shared/assets/icons/edit.svg"
 import {ReactComponent as Basket } from "src/shared/assets/icons/basket.svg"
 import { IconButton } from "src/shared/components/IconButton"
+import { deleteTask, getData } from "src/shared/api/tasks/api"
+import { Info, TaskObj } from "src/shared/api/tasks/types"
 
 
 interface TaskProps {
     title?: string,
     id: string,
+    setTasks: (tasks: []) => void,
+    tasks: TaskObj[],
+    setInfo: (info: Info) => void,
     
 }
 
-export const Task = ({ title, id }: TaskProps) => {
+export const Task = ({ title, id, setTasks, tasks, setInfo}: TaskProps) => {
 
     const { colorMode } = useColorMode();
 
     const strokeColor = colorMode === "dark" ? "white" : "black";
 
     const handleEdit = (type:string) => {
-        console.log(type)
+        
     }
 
-    const handleDelete = (type:string) => {
-        console.log(type)
+    const handleDelete = async (id:string) => {
+        await deleteTask(id);
+
+        const response = await getData();
+
+        setTasks(tasks.filter(elem => elem.id !== id))
+        setInfo(response.info)
     }
 
     return (
         <Flex 
-            
             maxW="800px" 
             w="100%" 
             border="1px solid gray" 
