@@ -46,6 +46,10 @@ export const Task = ({ title, id, setTasks, tasks, setInfo}: TaskProps) => {
         setInfo(response.info)
     }
 
+    const handleOnBlur = (e) => {
+        console.log(e.currentTarget.value)
+    }
+
 
     return (
         <Flex 
@@ -63,7 +67,7 @@ export const Task = ({ title, id, setTasks, tasks, setInfo}: TaskProps) => {
                                 ref={inputRef} 
                                 onChange={(e) => setValueInputEdit(e.currentTarget.value)} 
                                 value={valueInputEdit}
-                                onBlur={(e) => console.log(e.currentTarget.value)}></Input> : title}
+                                onBlur={(e) => handleOnBlur(e)}></Input> : title}
             </Box>
             <Flex>
                 <IconButton id={id} handleButton={handleEdit}>

@@ -44,11 +44,13 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
     
     const addTask = async(event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
-           await createTask(event.currentTarget.value)
-            
-            const result = await getData();
+           
 
             if(value) {
+                await createTask(event.currentTarget.value)
+            
+                const result = await getData();
+
                 setTasks(result.data)
                 setInfo(result.info)
                 setValue('')
