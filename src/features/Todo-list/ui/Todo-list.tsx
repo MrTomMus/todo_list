@@ -44,8 +44,6 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
     
     const addTask = async(event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
-           
-
             if(value) {
                 await createTask(event.currentTarget.value)
             

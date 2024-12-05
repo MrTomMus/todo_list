@@ -58,3 +58,23 @@ export async function deleteTask(id: string) {
 
     return result
 }
+
+export async function editTaskTitle(id: string, newTitle: string) {
+    const response = await fetch(`${API_TASK}/todos/${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: newTitle
+        })
+    })
+
+    if(!response.ok) {
+        throw new Error(`Изменение задачи не удалось ${response.status}`);
+    }
+
+    const result = response.json();
+
+    return result;
+}

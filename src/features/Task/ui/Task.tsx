@@ -2,7 +2,7 @@ import { Box, Flex, useColorMode, Input } from "@chakra-ui/react"
 import { ReactComponent as Edit } from "src/shared/assets/icons/edit.svg"
 import {ReactComponent as Basket } from "src/shared/assets/icons/basket.svg"
 import { IconButton } from "src/shared/components/IconButton"
-import { deleteTask, getData } from "src/shared/api/tasks/api"
+import { deleteTask, editTaskTitle, getData } from "src/shared/api/tasks/api"
 import { Info, TaskObj } from "src/shared/api/tasks/types"
 import { useEffect, useRef, useState } from "react"
 
@@ -46,8 +46,10 @@ export const Task = ({ title, id, setTasks, tasks, setInfo}: TaskProps) => {
         setInfo(response.info)
     }
 
-    const handleOnBlur = (e) => {
-        console.log(e.currentTarget.value)
+    const handleOnBlur = async (id: string, newTitle: string) => {
+        setInputEdit(false)
+        await editTaskTitle(id, newTitle)
+        setTasks(tasks.map(task => task.id === id ? {...task, title: newTitle} : task)) // Вопрос, в чем разница сэтать в стейт или запрашивать с сервака данные, ведь там они поменялись
     }
 
 
@@ -67,7 +69,7 @@ export const Task = ({ title, id, setTasks, tasks, setInfo}: TaskProps) => {
                                 ref={inputRef} 
                                 onChange={(e) => setValueInputEdit(e.currentTarget.value)} 
                                 value={valueInputEdit}
-                                onBlur={(e) => handleOnBlur(e)}></Input> : title}
+                                onBlur={(e) => handleOnBlur(id, e.currentTarget.value)}></Input> : title}
             </Box>
             <Flex>
                 <IconButton id={id} handleButton={handleEdit}>
