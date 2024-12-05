@@ -20,7 +20,7 @@ export const TodoList = ({tasks, setTasks, info, setInfo}:TodoListProps) => {
     
 
     const taskElements = tasks.map((elem) => (
-        <Task title={elem.title} key={elem.id} id={elem.id} setTasks={setTasks} tasks={tasks} setInfo={setInfo} info={info} />
+        <Task title={elem.title} key={elem.id} id={elem.id} setTasks={setTasks} tasks={tasks} setInfo={setInfo} />
     ));
 
     const getAllTask = async () => {
