@@ -2,7 +2,7 @@ import { Box, Flex, useColorMode, Input, Checkbox } from "@chakra-ui/react"
 import { ReactComponent as Edit } from "src/shared/assets/icons/edit.svg"
 import {ReactComponent as Basket } from "src/shared/assets/icons/basket.svg"
 import { IconButton } from "src/shared/components/IconButton"
-import { deleteTask, editTaskTitle, getData } from "src/shared/api/tasks/api"
+import { deleteTask, editTaskTitle, getData, setIsDone } from "src/shared/api/tasks/api"
 import { Info, TaskObj } from "src/shared/api/tasks/types"
 import { useEffect, useRef, useState } from "react"
 
@@ -37,7 +37,7 @@ export const Task = ({ title, id, setTasks, tasks, setInfo, isDone}: TaskProps) 
         }
     }, [isInputEdit]);
 
-    const handleDelete = async (id:string) => {
+    const handleDelete = async () => {
         await deleteTask(id);
 
         const response = await getData();
@@ -52,6 +52,14 @@ export const Task = ({ title, id, setTasks, tasks, setInfo, isDone}: TaskProps) 
         setTasks(tasks.map(task => task.id === id ? {...task, title: newTitle} : task)) // Вопрос, в чем разница сэтать в стейт или запрашивать с сервака данные, ведь там они поменялись
     }
 
+    const handleIsDone = async () => {
+        await setIsDone(id, isDone);
+
+        const response = await getData();
+        setTasks(response.data)
+        setInfo(response.info)
+    }
+
     return (
         <Flex 
             maxW="800px" 
@@ -63,7 +71,7 @@ export const Task = ({ title, id, setTasks, tasks, setInfo, isDone}: TaskProps) 
             p="15px 35px"
             boxSizing="border-box"
             >
-            <Checkbox isChecked={isDone}/>
+            <Checkbox onChange={() => handleIsDone()} isChecked={isDone}/>
             <Box maxW="600px" w="100%" wordBreak="normal">
                 
             {isInputEdit ? <Input 

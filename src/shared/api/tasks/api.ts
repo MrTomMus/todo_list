@@ -78,3 +78,20 @@ export async function editTaskTitle(id: string, newTitle: string) {
 
     return result;
 }
+
+export async function setIsDone(id: string, isDone: boolean) {
+    const response = await fetch(`${API_TASK}/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            isDone: !isDone
+        })
+    })
+
+    if(!response.ok) {
+        throw new Error(`Смена статуса задачи не удалась ${response.status}`)
+    }
+
+}
